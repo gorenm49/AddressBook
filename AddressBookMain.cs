@@ -37,13 +37,13 @@ namespace AddressBook
             addrBook.Add(contacts);
         }
 
-        public void EditContact(string FirstName)
+        public void EditContact(string fName)
         {
             Contacts c1 = new Contacts();
 
             foreach (var data in addrBook)
             {
-                if (data.FirstName == FirstName)
+                if (data.FirstName == fName)
                 {
                     c1 = data;
                     return;
@@ -89,6 +89,31 @@ namespace AddressBook
                 
             }
 
+        }
+
+        public void DeleteContact(string fName)
+        {
+            Contacts c2 = new Contacts();
+            
+            foreach (var data in addrBook)
+            {
+                if (data.FirstName == fName)
+                {
+                    c2 = data;
+                }
+            }
+            addrBook.Remove(c2);
+            Display();
+        }
+
+        public void Display()
+        {
+
+            foreach (var data in addrBook)
+            {
+                System.Console.WriteLine("Contact Data is: \n"+data.FirstName+"\n"+data.LastName+"\n"+data.Address+"\n"+data.City+"\n"+data.State+"\n"+data.Zip+"\n"+data.PhoneNumber+"\n"+data.Email);
+                
+            }
         }
     }
 }
