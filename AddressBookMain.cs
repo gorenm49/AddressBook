@@ -103,7 +103,7 @@ namespace AddressBook
                 }
             }
             addrBook.Remove(c2);
-            Display();
+    
         }
 
         public void Display()
