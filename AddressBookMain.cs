@@ -10,31 +10,41 @@ namespace AddressBook
         {
 
             Contacts contacts = new Contacts();
-            System.Console.WriteLine("Enter First Name: ");
-            contacts.FirstName = Console.ReadLine();
+            Console.WriteLine("Please confirm how much contact you want to create:");
+            int contactsCount = Convert.ToInt32(Console.ReadLine());
+            
+            for (int i = 1; i <= contactsCount; i++)
+            {
+                System.Console.WriteLine("Enter details for "+i+" Contact");
 
-            System.Console.WriteLine("Enter Last Name: ");
-            contacts.LastName = Console.ReadLine();
+                System.Console.WriteLine("Enter First Name: ");
+                contacts.FirstName = Console.ReadLine();
 
-            System.Console.WriteLine("Enter Adress: ");
-            contacts.Address = Console.ReadLine();
+                System.Console.WriteLine("Enter Last Name: ");
+                contacts.LastName = Console.ReadLine();
 
-            System.Console.WriteLine("Enter City: ");
-            contacts.City = Console.ReadLine();
+                System.Console.WriteLine("Enter Adress: ");
+                contacts.Address = Console.ReadLine();
 
-            System.Console.WriteLine("Enter State: ");
-            contacts.State = Console.ReadLine();
+                System.Console.WriteLine("Enter City: ");
+                contacts.City = Console.ReadLine();
 
-            System.Console.WriteLine("Enter Zip: ");
-            contacts.Zip = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("Enter State: ");
+                contacts.State = Console.ReadLine();
 
-            System.Console.WriteLine("Phone Number: ");
-            contacts.PhoneNumber = Convert.ToInt32(Console.ReadLine());
+                System.Console.WriteLine("Enter Zip: ");
+                contacts.Zip = Convert.ToInt32(Console.ReadLine());
 
-            System.Console.WriteLine("Enter Email-Id: ");
-            contacts.Email = Console.ReadLine();
+                System.Console.WriteLine("Phone Number: ");
+                contacts.PhoneNumber = Convert.ToInt32(Console.ReadLine());
 
-            addrBook.Add(contacts);
+                System.Console.WriteLine("Enter Email-Id: ");
+                contacts.Email = Console.ReadLine();
+
+                addrBook.Add(contacts);
+
+                System.Console.WriteLine("Contact added Successfully....");
+            }
         }
 
         public void EditContact(string fName)
