@@ -1,16 +1,34 @@
 using System;
 
+
 namespace AddressBook
 {
     public class AddressBookMain
     {
+
         List<Contacts> addrBook = new List<Contacts>();
+
+      /*  public int AddAddressBook()
+        {
+
+            System.Console.WriteLine("Enter count for Address book:");
+            int addCount = Convert.ToInt32(Console.ReadLine());
+
+            Dictionary<addCount, addrBook> dict = new Dictionary<addCount,addrBook>();
+            
+            for (int i = 1; i <=addCount; i++)           {
+            {
+                return dict.Add(i,addrBook);
+            }
+
+        }*/
 
         public void AddContact()
         {
+            //AddAddressBook();
 
             Contacts contacts = new Contacts();
-            Console.WriteLine("Please confirm how much contact you want to create:");
+            Console.WriteLine("Please the count of contact you want to create:");
             int contactsCount = Convert.ToInt32(Console.ReadLine());
             
             for (int i = 1; i <= contactsCount; i++)
@@ -126,4 +144,4 @@ namespace AddressBook
             }
         }
     }
-}
+} 
