@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AddressBook
 {
@@ -16,6 +17,17 @@ namespace AddressBook
             switch (num1)
             {
                 case 1:
+                    System.Console.WriteLine("Enter count for Address book:");
+                    int addCount = Convert.ToInt32(Console.ReadLine());
+
+                    Dictionary<int, string> dict = new Dictionary<int,string>();
+            
+                    for (int i = 1; i <=addCount; i++)           
+                    {
+                        List<AddressBookMain> newAdd = new List<AddressBookMain>();
+                        dict.Add(i,"NewDict");
+                        System.Console.WriteLine(i+" Dictionary Created..");
+                    }
                     addrMain.AddContact();
                     break;
                 case 2:
