@@ -7,25 +7,10 @@ namespace AddressBook
     {
 
         List<Contacts> addrBook = new List<Contacts>();
-
-      /*  public int AddAddressBook()
-        {
-
-            System.Console.WriteLine("Enter count for Address book:");
-            int addCount = Convert.ToInt32(Console.ReadLine());
-
-            Dictionary<addCount, addrBook> dict = new Dictionary<addCount,addrBook>();
-            
-            for (int i = 1; i <=addCount; i++)           {
-            {
-                return dict.Add(i,addrBook);
-            }
-
-        }*/
+        bool lcheck = false;
 
         public void AddContact()
         {
-            //AddAddressBook();
 
             Contacts contacts = new Contacts();
             Console.WriteLine("Please the count of contact you want to create:");
@@ -114,6 +99,8 @@ namespace AddressBook
                         System.Console.WriteLine("Choose right option..");
                         break;
                 }
+
+                addrBook.Add(c1);
                 
             }
 
@@ -127,11 +114,18 @@ namespace AddressBook
             {
                 if (data.FirstName == fName)
                 {
-                    c2 = data;
+                    lcheck =true;
                 }
             }
-            addrBook.Remove(c2);
-    
+            if (lcheck == true)
+            {
+                addrBook.Remove(c2);
+                System.Console.WriteLine("Contact Deleted..");
+            }
+            else
+            {
+                System.Console.WriteLine("Name not matched with current list");
+            }               
         }
 
         public void Display()
