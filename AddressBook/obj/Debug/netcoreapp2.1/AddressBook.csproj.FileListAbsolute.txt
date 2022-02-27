@@ -12,3 +12,11 @@ E:\Nityanand\AddressBook\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.csprojA
 E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.csproj.CoreCompileInputs.cache
 E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.AssemblyInfoInputs.cache
 E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.AssemblyInfo.cs
+E:\Nityanand\New Projects\AddressBook\bin\Debug\netcoreapp2.1\AddressBook.deps.json
+E:\Nityanand\New Projects\AddressBook\bin\Debug\netcoreapp2.1\AddressBook.runtimeconfig.json
+E:\Nityanand\New Projects\AddressBook\bin\Debug\netcoreapp2.1\AddressBook.runtimeconfig.dev.json
+E:\Nityanand\New Projects\AddressBook\bin\Debug\netcoreapp2.1\AddressBook.dll
+E:\Nityanand\New Projects\AddressBook\bin\Debug\netcoreapp2.1\AddressBook.pdb
+E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.csprojAssemblyReference.cache
+E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.dll
+E:\Nityanand\New Projects\AddressBook\obj\Debug\netcoreapp2.1\AddressBook.pdb

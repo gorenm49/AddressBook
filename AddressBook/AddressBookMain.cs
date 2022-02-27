@@ -185,5 +185,21 @@ namespace AddressBook
             }
 
         }
+
+        public void ViewPersonInTheCityOrState(string fname)
+        {
+            foreach (Contacts item in contact)
+            {
+                if (contact.Any(x => x.FirstName == fname))
+                {
+                    Console.WriteLine("Person Found!!");
+                }
+                else
+                {
+                    Console.WriteLine("Person not found");
+                }
+            }
+
+        }
     }
 }
