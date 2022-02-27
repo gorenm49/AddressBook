@@ -9,6 +9,7 @@ namespace AddressBook
     {
         public List<Contacts> contact = new List<Contacts>();
         Contacts addressBook = new Contacts();
+        int counter = 0;
         public void AddContact()
         {
             Console.WriteLine("Enter the count of the contact you want to create:");
@@ -54,6 +55,7 @@ namespace AddressBook
                 else
                 {
                     contact.Add(addressBook);
+                    counter++;
                     Display(addressBook);
                 }
             }
@@ -199,7 +201,11 @@ namespace AddressBook
                     Console.WriteLine("Person not found");
                 }
             }
+        }
 
+        public void CountOfContactPersons()
+        {
+            Console.WriteLine("Number of contact Persons"+counter);
         }
     }
 }

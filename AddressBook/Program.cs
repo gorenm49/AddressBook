@@ -19,7 +19,8 @@ namespace AddressBook
                     "\n 3. Delete Contact " +
                     "\n 4. Search a person in the city or state" +
                     "\n 5. View Person In The City Or State" +
-                    "\n 6. Exit");
+                    "\n 6. CountOfContactPersons" +
+                    "\n 7. Exit");
 
                 AddressBookMain addressBook = new AddressBookMain();
 
@@ -47,6 +48,9 @@ namespace AddressBook
                         addressBook.ViewPersonInTheCityOrState(fname1);
                         break;
                     case 6:
+                        addressBook.CountOfContactPersons();
+                        break;
+                    case 7:
                         Console.WriteLine("Application will exit");
                         return;
                     default:
