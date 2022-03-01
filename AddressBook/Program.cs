@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AddressBook
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            System.Console.WriteLine("Welcome to Address Book Program!!!");
+
+            Console.WriteLine("***********************************************************************************");
+            while (true)
+            {
+                System.Console.WriteLine("\nSelect Operation: " +
+                    "\n 1. Add Contact" +
+                    "\n 2. Edit Contact" +
+                    "\n 3. Delete Contact " +
+                    "\n 4. Search a person in the city or state" +
+                    "\n 5. View Person In The City Or State" +
+                    "\n 6. CountOfContactPersons" +
+                    "\n 7. Sort the Entries by Name" +
+                    "\n 8. Exit");
+
+                AddressBookMain addressBook = new AddressBookMain();
+
+                int option = int.Parse(Console.ReadLine());
+
+                switch (option)
+                {
+                    case 1:
+                        addressBook.AddContact();
+                        break;
+                    case 2:
+                        addressBook.EditContact();
+                        break;
+                    case 3:
+                        addressBook.DeleteContact();
+                        break;
+                    case 4:
+                        Console.WriteLine("Enter the first name of the person to search ");
+                        string fname = Console.ReadLine();
+                        addressBook.SearchPersonInTheCityOrState(fname);
+                        break;
+                    case 5:
+                        Console.WriteLine("Enter the first name of the persion to view record");
+                        string fname1 = Console.ReadLine();
+                        addressBook.ViewPersonInTheCityOrState(fname1);
+                        break;
+                    case 6:
+                        addressBook.CountOfContactPersons();
+                        break;
+                    case 7:
+                        addressBook.SortContactByName();
+                        break;
+                    case 8:
+                        Console.WriteLine("Application will exit");
+                        return;
+                    default:
+                        System.Console.WriteLine("invalid input");
+                        break;
+                }
+            }
+        }
+    }
+}
