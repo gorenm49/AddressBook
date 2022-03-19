@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace AddressBook
 {
@@ -59,6 +60,7 @@ namespace AddressBook
                     contact.Add(addressBook);
                     ReadWriteContactIntoCSVFile();
                     ReadWriteContactIntoTextFile();
+                    ReadWriteInJsonFIle();
 
                 }
             }
@@ -336,6 +338,34 @@ namespace AddressBook
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void ReadWriteInJsonFIle()
+        {
+            try
+            {
+                string path = @"C:\Users\Nityanand Gore\source\repos\AddressBook\AddressBook\AddFileData.json";
+                foreach (Contacts item in contact)
+                {
+                    string data_write = JsonConvert.SerializeObject(item);
+                    File.WriteAllText(path, data_write);
+                }
+
+                string data_read = File.ReadAllText(path);
+
+                var jsonResult = JsonConvert.DeserializeObject<List<Contacts>>(data_read).ToList();
+                Console.WriteLine("Reading from json");
+                foreach (Contacts item in jsonResult)
+                {
+                    Console.WriteLine();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }

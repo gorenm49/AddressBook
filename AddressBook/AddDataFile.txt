@@ -4,3 +4,9 @@ Address Book Details Added For Vishu Contact
 Vishu	Gore	Risod	Risod	Maharashtra	444565	7898654565	vishu@gmail.com
 Address Book Details Added For Akasha Contact
 Akasha	Dhage	Washim	Washim	Maharashtra	455522	7898654565	akasha@gmail.com
+Address Book Details Added For Anubhav Contact
+Anubhav	yadav	vasipur	Vasipur	MP	784565	9545659878	anu@gmail.com
+Address Book Details Added For Chanda Contact
+Chanda	Mukharji	Pune	Pune	MH	412020	9456986556	chanda@gmail.com
+Address Book Details Added For Manav Contact
+Manav	Sharma	wsm	wsm	MH	454556	9878986545	mana@gmail.com
