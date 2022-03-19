@@ -57,6 +57,7 @@ namespace AddressBook
                 else
                 {
                     contact.Add(addressBook);
+                    ReadWriteContactIntoCSVFile();
                     ReadWriteContactIntoTextFile();
 
                 }
@@ -272,6 +273,51 @@ namespace AddressBook
                             "\t" + item.zip +
                             "\t" + item.phone +
                             "\t" + item.email);
+                        sw.Close();
+                    }
+                }
+
+                using (StreamReader sr = File.OpenText(filePath))
+                {
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void ReadWriteContactIntoCSVFile()
+        {
+            try
+            {
+                string filePath = @"C:\Users\Nityanand Gore\source\repos\AddressBook\AddressBook\AddDataFile.csv";
+                using (StreamWriter sw = File.AppendText(filePath))
+                {
+                    sw.WriteLine("FirstName,\t" +
+                        "Last Name,\t" +
+                        "Address,\t" +
+                        "City,\t" +
+                        "State,\t" +
+                        "Zip,\t" +
+                        "Phone Number,\t" +
+                        "Email");
+                    foreach (Contacts item in contact)
+                    {
+                        sw.WriteLine(item.fname +
+                            ",\t" + item.lname +
+                            ",\t" + item.address +
+                            ",\t" + item.city +
+                            ",\t" + item.state +
+                            ",\t" + item.zip +
+                            ",\t" + item.phone +
+                            ",\t" + item.email);
                         sw.Close();
                     }
                 }
