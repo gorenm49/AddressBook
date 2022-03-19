@@ -15,16 +15,18 @@ namespace AddressBook
             {
                 System.Console.WriteLine("\nSelect Operation: " +
                     "\n 1. Add Contact" +
-                    "\n 2. Edit Contact" +
+                    "\n 2. Edit Contact phone by id" +
                     "\n 3. Delete Contact " +
                     "\n 4. Search a person in the city or state" +
                     "\n 5. View Person In The City Or State" +
                     "\n 6. CountOfContactPersons" +
                     "\n 7. Sort the Entries by Name" +
                     "\n 8. Sort Contact By City State Or Zip" +
-                    "\n 9. Exit");
+                    "\n 9. Display Contacts" +
+                    "\n 10. Exit");
 
                 AddressBookMain addressBook = new AddressBookMain();
+                Contacts contacts = new Contacts();
 
                 int option = int.Parse(Console.ReadLine());
 
@@ -34,7 +36,11 @@ namespace AddressBook
                         addressBook.AddContact();
                         break;
                     case 2:
-                        addressBook.EditContact();
+                        Console.WriteLine("Enter id ");
+                        int id = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter Phone number to update ");
+                        string phone = Console.ReadLine();
+                        addressBook.EditContactPhoneById(id,phone);
                         break;
                     case 3:
                         addressBook.DeleteContact();
@@ -61,6 +67,9 @@ namespace AddressBook
                         addressBook.SortContactByCityStateOrZip(getstring);
                         break;
                     case 9:
+                        addressBook.Display(contacts);
+                        break;
+                    case 10:
                         Console.WriteLine("Application will exit");
                         return;
                     default:
