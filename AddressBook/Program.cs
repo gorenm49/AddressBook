@@ -23,7 +23,8 @@ namespace AddressBook
                     "\n 7. Sort the Entries by Name" +
                     "\n 8. Sort Contact By City State Or Zip" +
                     "\n 9. Display Contacts" +
-                    "\n 10. Exit");
+                    "\n 10. Retrive Records By Pesticular Date Range" +
+                    "\n 11. Exit ");
 
                 AddressBookMain addressBook = new AddressBookMain();
                 Contacts contacts = new Contacts();
@@ -70,6 +71,13 @@ namespace AddressBook
                         addressBook.Display(contacts);
                         break;
                     case 10:
+                        Console.WriteLine("Enter date 1:");
+                        DateTime date1 = DateTime.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter date 2:");
+                        DateTime date2 = DateTime.Parse(Console.ReadLine());
+                        addressBook.RetriveRecordsByPesticularDateRange(date1, date2);
+                        break;
+                    case 11:
                         Console.WriteLine("Application will exit");
                         return;
                     default:

@@ -168,10 +168,10 @@ namespace AddressBook
 
                 Console.WriteLine(ex.Message);
             }
-            
+
         }
 
-        public bool EditContactPhoneById(int id , string phone)
+        public bool EditContactPhoneById(int id, string phone)
         {
             try
             {
@@ -200,9 +200,9 @@ namespace AddressBook
 
                 throw new Exception(ex.Message);
             }
-            
+
         }
-        
+
 
         public void SearchPersonInTheCityOrState(string fname)
         {
@@ -392,7 +392,68 @@ namespace AddressBook
 
                 throw new Exception(ex.Message);
             }
-            
+
+        }
+
+        public void RetriveRecordsByPesticularDateRange(DateTime date1, DateTime date2)
+        {
+            try
+            {
+                Contacts contact = new Contacts();
+
+
+                using (this.connection)
+                {
+
+                    SqlCommand command = new SqlCommand("RetriveContactInperticularDateRange", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@date1", date1);
+                    command.Parameters.AddWithValue("@date2", date2);
+
+                    this.connection.Open();
+
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    Console.WriteLine("\nAll Address Book contact Between date range  " + date1 + " and " + date2 + " Are:");
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            contact.id = dataReader.GetInt32(0);
+                            contact.fname = dataReader.GetString(1);
+                            contact.lname = dataReader.GetString(2);
+                            contact.address = dataReader.GetString(3);
+                            contact.city = dataReader.GetString(4);
+                            contact.state = dataReader.GetString(5);
+                            contact.zip = dataReader.GetString(6);
+                            contact.phone = dataReader.GetString(7);
+                            contact.email = dataReader.GetString(8);
+
+                            Console.WriteLine("Contact Details " +
+                            "\nId - " + contact.id +
+                           "\nFirst Name - " + contact.fname +
+                           "\nLast Name - " + contact.lname +
+                           "\nAddress - " + contact.address +
+                           "\nCity - " + contact.city +
+                           "\nState - " + contact.state +
+                           "\nZip - " + contact.zip +
+                           "\nPhone Number - " + contact.phone +
+                           "\nEmail Id - " + contact.email);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No records found!!");
+                    }
+
+                    dataReader.Close();
+                    this.connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
