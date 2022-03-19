@@ -2,3 +2,5 @@
 Nityanand	Gore	Washim	washim	Maharashtra	444505	7898659845	goreni@gmail.com
 Address Book Details Added For Vishu Contact
 Vishu	Gore	Risod	Risod	Maharashtra	444565	7898654565	vishu@gmail.com
+Address Book Details Added For Akasha Contact
+Akasha	Dhage	Washim	Washim	Maharashtra	455522	7898654565	akasha@gmail.com
