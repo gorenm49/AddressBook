@@ -4,16 +4,21 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace AddressBook
 {
     public class AddressBookMain
     {
+        public static string connectionstr = "Data Source=(localDB)\\MSSQLLocalDB;Initial Catalog=Address_BOOK_Service_DB;Integrated Security=True;";
+        SqlConnection connection = new SqlConnection(connectionstr);
+
         public List<Contacts> contact = new List<Contacts>();
         Contacts addressBook = new Contacts();
 
         int counter = 0;
-        public void AddContact()
+        public bool AddContact()
         {
             Console.WriteLine("Enter the count of the contact you want to create:");
             int contactCount = Convert.ToInt32(Console.ReadLine());
@@ -58,11 +63,35 @@ namespace AddressBook
                 else
                 {
                     contact.Add(addressBook);
-                    ReadWriteContactIntoCSVFile();
-                    ReadWriteContactIntoTextFile();
-                    ReadWriteInJsonFIle();
-
+                    //ReadWriteContactIntoCSVFile();
+                    //ReadWriteContactIntoTextFile();
                 }
+            }
+
+            SqlCommand com = new SqlCommand("InsertDataInAddressBook", connection);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@fname", addressBook.fname);
+            com.Parameters.AddWithValue("@lname", addressBook.lname);
+            com.Parameters.AddWithValue("@address", addressBook.address);
+            com.Parameters.AddWithValue("@city", addressBook.city);
+            com.Parameters.AddWithValue("@state", addressBook.state);
+            com.Parameters.AddWithValue("@zip", addressBook.zip);
+            com.Parameters.AddWithValue("@phone", addressBook.phone);
+            com.Parameters.AddWithValue("@email", addressBook.email);
+
+            connection.Open();
+            int i = com.ExecuteNonQuery();
+            connection.Close();
+            if (i >= 1)
+            {
+                Console.WriteLine("Record has bees added in Database");
+                return true;
+
+            }
+            else
+            {
+
+                return false;
             }
         }
 
@@ -87,95 +116,93 @@ namespace AddressBook
         }
         public void Display(Contacts contact)
         {
-            Console.WriteLine("Contact Details " +
-                "\nFirst Name - " + contact.fname +
-                "\nLast Name - " + contact.lname +
-                "\nAddress - " + contact.address +
-                "\nCity - " + contact.city +
-                "\nState - " + contact.state +
-                "\nZip - " + contact.zip +
-                "\nPhone Number - " + contact.phone +
-                "\nEmail Id - " + contact.email);
-
-        }
-
-        public void EditContact()
-        {
-            Console.WriteLine("Enter The First Name");
-            string Fname = Console.ReadLine();
-
-            foreach (var item in contact)
+            try
             {
-                if (item.fname == Fname)
+                using (this.connection)
                 {
 
-                    Console.WriteLine("\nEnter the details to update contact:" +
-                        "\n1. First Name" +
-                        "\n2. Last Name" +
-                        "\n3. Address" +
-                        "\n4. city" +
-                        "\n5. State" +
-                        "\n6. Zip" +
-                        "\n7. PhoneNumber" +
-                        "\n8. Email");
+                    SqlCommand command = new SqlCommand("ShowAddressBook", this.connection);
 
-                    int option = Convert.ToInt32(Console.ReadLine());
-                    String getString;
-                    switch (option)
+                    this.connection.Open();
+
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    Console.WriteLine("\nAll Empoyees record is:\n");
+                    if (dataReader.HasRows)
                     {
-                        case 1:
-                            Console.WriteLine("Enter first Name to Update");
-                            getString = Console.ReadLine();
-                            item.fname = getString;
-                            break;
-                        case 2:
-                            Console.WriteLine("Enter Last Name to Update");
-                            getString = Console.ReadLine();
-                            item.lname = getString;
-                            break;
-                        case 3:
-                            Console.WriteLine("Enter Address to Update");
-                            getString = Console.ReadLine();
-                            item.address = getString;
-                            break;
-                        case 4:
-                            Console.WriteLine("Enter City Name to Update");
-                            getString = Console.ReadLine();
-                            item.city = getString;
-                            break;
-                        case 5:
-                            Console.WriteLine("Enter State Name to Update");
-                            getString = Console.ReadLine();
-                            item.state = getString;
-                            break;
-                        case 6:
-                            Console.WriteLine("Enter Zip code to Update");
-                            getString = Console.ReadLine();
-                            item.zip = getString;
-                            break;
-                        case 7:
-                            Console.WriteLine("Enter Phone Number to Update");
-                            getString = Console.ReadLine();
-                            item.phone = getString;
-                            break;
-                        case 8:
-                            Console.WriteLine("Enter E-mail id to Update");
-                            getString = Console.ReadLine();
-                            item.email = getString;
-                            break;
-                        default:
-                            Console.WriteLine("Invalid Choice");
-                            break;
+                        while (dataReader.Read())
+                        {
+                            contact.id = dataReader.GetInt32(0);
+                            contact.fname = dataReader.GetString(1);
+                            contact.lname = dataReader.GetString(2);
+                            contact.address = dataReader.GetString(3);
+                            contact.city = dataReader.GetString(4);
+                            contact.state = dataReader.GetString(5);
+                            contact.zip = dataReader.GetString(6);
+                            contact.phone = dataReader.GetString(7);
+                            contact.email = dataReader.GetString(8);
+
+
+
+                            Console.WriteLine("Contact Details " +
+                            "\nFirst Name - " + contact.fname +
+                            "\nLast Name - " + contact.lname +
+                            "\nAddress - " + contact.address +
+                            "\nCity - " + contact.city +
+                            "\nState - " + contact.state +
+                            "\nZip - " + contact.zip +
+                            "\nPhone Number - " + contact.phone +
+                            "\nEmail Id - " + contact.email);
+                        }
                     }
+                    else
+                    {
+                        Console.WriteLine("No records available");
+                    }
+                    dataReader.Close();
+                    this.connection.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+
+        public bool EditContactPhoneById(int id , string phone)
+        {
+            try
+            {
+                Contacts contacts = new Contacts();
+
+                SqlCommand com = new SqlCommand("UpdatePesonsPhoneNumberById", connection);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@phone", phone);
+
+                connection.Open();
+                int i = com.ExecuteNonQuery();
+                connection.Close();
+                if (i >= 1)
+                {
+                    Console.WriteLine("Record updated Successfully!!");
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("Record not found.");
+                    return false;
                 }
-
-                Display(item);
             }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            
         }
+        
 
         public void SearchPersonInTheCityOrState(string fname)
         {
